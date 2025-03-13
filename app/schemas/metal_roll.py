@@ -12,7 +12,7 @@ class MetalRollCreate(MetalRollBase):
     pass
 
 
-class MetalRoll(MetalRollBase):
+class MetalRollInfo(MetalRollBase):
     id: int
     date_added: datetime
-    date_removed: datetime
+    date_removed: datetime | None
