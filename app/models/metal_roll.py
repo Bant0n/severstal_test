@@ -1,5 +1,6 @@
-from datetime import datetime, UTC
-from sqlalchemy import Float, Integer, DateTime
+from datetime import datetime
+
+from sqlalchemy import Float, Integer, func
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.db import Base
@@ -12,10 +13,8 @@ class MetalRoll(Base):
     length: Mapped[float] = mapped_column(Float, nullable=False)
     weight: Mapped[float] = mapped_column(Float, nullable=False)
     date_added: Mapped[datetime] = mapped_column(
-        DateTime,
-        default=datetime.now(UTC),
+        server_default=func.now(),
     )
     date_removed: Mapped[datetime] = mapped_column(
-        DateTime,
         nullable=True,
     )
