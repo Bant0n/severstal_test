@@ -16,3 +16,4 @@ class MetalRollInfo(MetalRollBase):
     id: int
     date_added: datetime
     date_removed: datetime | None
+    is_deleted: bool
