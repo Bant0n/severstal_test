@@ -18,3 +18,4 @@ class MetalRoll(Base):
     date_removed: Mapped[datetime] = mapped_column(
         nullable=True,
     )
+    is_deleted: Mapped[bool] = mapped_column(default=False)

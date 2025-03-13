@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -20,6 +21,15 @@ async def get_all_metal_rolls(
     ],
 ) -> list[MetalRollInfo]:
     return await metal_roll_serv.get_all_metal_rolls()
+
+
+@router.get("/all_deleted")
+async def get_all_deleted_metal_rolls(
+    metal_roll_serv: Annotated[
+        MetalRollService, Depends(get_metal_roll_service)
+    ],
+) -> list[MetalRollInfo]:
+    return await metal_roll_serv.get_all_deleted_metal_rolls()
 
 
 @router.post("/create")
@@ -45,3 +55,14 @@ async def delete_metal_roll(
         )
     except MetalRollNotFoundException as e:
         raise HTTPException(status_code=404, detail=e.detail)
+
+
+@router.get("/statistics")
+async def get_statistics(
+    start_date: datetime,
+    end_date: datetime,
+    metal_roll_serv: Annotated[
+        MetalRollService, Depends(get_metal_roll_service)
+    ],
+) -> dict:
+    return await metal_roll_serv.get_statistics(start_date, end_date)
