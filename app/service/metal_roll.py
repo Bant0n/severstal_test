@@ -24,7 +24,7 @@ class MetalRollService:
             metal_roll_id=metal_roll_id
         )
 
-        if not metal_roll:
+        if metal_roll.is_deleted:
             raise MetalRollNotFoundException
 
         metal_roll = await self.metal_roll_repository.delete_metal_roll(
